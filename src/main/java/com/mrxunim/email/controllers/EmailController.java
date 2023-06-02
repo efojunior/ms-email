@@ -23,7 +23,7 @@ public class EmailController {
     @Autowired
     EmailService emailService;
 
-    @PostMapping("/sending-email")
+    @PostMapping("/enviando-email")
     public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto) {
         EmailModel emailModel = new EmailModel();
         BeanUtils.copyProperties(emailDto, emailModel);
@@ -31,12 +31,12 @@ public class EmailController {
         return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
     }
 
-    @GetMapping("/emails")
+    @GetMapping("/email")
     public ResponseEntity<Page<EmailModel>> getAllEmails(@PageableDefault(page = 0, size = 5, sort = "emailId", direction = Sort.Direction.DESC) Pageable pageable){
         return new ResponseEntity<>(emailService.findAll(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/emails/{emailId}")
+    @GetMapping("/email/{emailId}")
     public ResponseEntity<Object> getOneEmail(@PathVariable(value="emailId") UUID emailId){
         Optional<EmailModel> emailModelOptional = emailService.findById(emailId);
         if(!emailModelOptional.isPresent()) {

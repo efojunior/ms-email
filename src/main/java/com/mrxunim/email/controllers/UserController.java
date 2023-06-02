@@ -19,14 +19,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/usuario")
     public ResponseEntity<UserModel> createdUser(@RequestBody @Valid UserModel userModel) {
 
         UserModel result = userService.save(userModel);
         return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/usuario/{id}")
     public ResponseEntity<UserModel> createdUser(@PathVariable UUID id) {
 
         UserModel result = userService.findById(id);
